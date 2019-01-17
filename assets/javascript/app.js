@@ -1,6 +1,6 @@
 // DISPLAY STARTING BUTTONS 
     // create an initial array (store as var topics = ...)
-    var topics = ["Alexander McQueen", "Chanel", "Dior", "Marc Jacobs", "Prada", "Louis Vuitton", "Gucci"];
+    var topics = ["Toy Story", "WALL-E", "Finding Nemo", "Minions", "Despicable Me", "The Lion King", "Ratatouille"];
     
     // create a function to display starting fashion designer buttons
     function createBtn() {
@@ -73,6 +73,7 @@
 
 // FXNS FOR WHEN THE GIF IS CLICKED:
     // when the gif is clicked (odd number of times):
+
         // create a function that:
             // displays the animated gif to the page
 
