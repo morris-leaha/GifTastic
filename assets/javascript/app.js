@@ -1,5 +1,11 @@
+window.onload = function() {
+    createBtn();
+    $(".btn").on("click", displayGIFs);
+    $(".ind-gif").on("click", animateGIFs);
+}
+
 // DISPLAY STARTING BUTTONS 
-    // create an initial array (store as var topics = ...)
+    // initial array (store as var topics = ...)
     var topics = ["Toy Story", "WALL-E", "Finding Nemo", "Minions", "Despicable Me", "The Lion King", "Ratatouille"];
     
     // create a function to display starting buttons
@@ -18,17 +24,7 @@
         }
     }
 
-    createBtn();
-
-// WHEN BUTTON IS CLICKED, RUN FXN TO GET INFORMATION FROM API & DISPLAY IT
-    
-    // add event listener for when ANY button is clicked to run the function that GETS information from GIPHY API & DISPLAYS:
-    
-    window.onload = function() {
-        $(".btn").on("click", displayGIFs);
-        $("<img>").on("click", animateGIFs);
-    }
-    
+// WHEN ANY BUTTON IS CLICKED, RUN FXN TO GET INFORMATION FROM API & DISPLAY IT
     // create the function that GETS info & DISPLAYS info
     function displayGIFs() {
         // get specific button value clicked and store in a variable
@@ -51,11 +47,11 @@
             // loop through the data array returned from AJAX call to create images for each of the 10 object
                 for (var i = 0; i < data.length; i++) {
                     // ===== DISPLAY EACH GIF: ======
-                    // create a div that will hold all 10 gifs per button value clicked & store in variable 
-                        var giphyDiv = $("<div class='all-gifs'>");
+                    // create a div that will hold each gif image & store in variable 
+                        var giphyDiv = $("<div class='gif-result'>");
                     
-                    // create an img div for each ind gif & store in variable
-                        var gifImgDiv = $("<img class='each-gif'>");   
+                    // create an img for each ind gif & store in variable
+                        var gifImgDiv = $("<img>");   
 
                     // add the src attribute and set to url for still
                         gifImgDiv.attr("src", data[i].images.fixed_width_still.url);
@@ -66,8 +62,11 @@
 
                     // add data-state attribute
                         gifImgDiv.attr("data-state", "still");
+
+                    // add class
+                        gifImgDiv.addClass("ind-gif");
                     
-                    // display the 10 random STATIC gifs to page            
+                    // append individual gifs to their respective div
                         giphyDiv.append(gifImgDiv);
                     
                     // ===== DISPLAY EACH RATING: ======
@@ -90,19 +89,25 @@
         });
     }
 
-// FXNS FOR WHEN THE GIF IS CLICKED:
+// FXN FOR WHEN ANY GIF IS CLICKED:
     function animateGIFs () {
 
-    }
-    // when the gif is clicked (odd number of times):
-        // create a function that:
-            // displays the animated gif to the page
+        var gifState = $(this).attr("data-state");
+            console.log(gifState);
+        var gifStill = $(this).attr("data-still");
+            console.log(gifStill);
+        var gifAnimate = $(this).attr("data-animate");
+            console.log(gifAnimate);
 
-    // when the gif is clicked again (even number of times):
-        // create a function that:
-            // displays the static gif
-            
-            
+
+        if (gifState === "still") {
+            $(this).attr("src", gifAnimate);
+            $(this).attr("data-state", "animate");
+        } else if (gifState === "animate") {
+            $(this).attr("src", gifStill);
+            $(this).attr("data-state", "still");
+        }
+    }
 
  // ==================================OPTIONAL/EXTRA=====================================================================       
             
