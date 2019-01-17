@@ -21,22 +21,55 @@
     createBtn();
 
 // WHEN BUTTON IS CLICKED, RUN FXN TO GET INFORMATION FROM API & DISPLAY IT
-// when a fashion designer button is clicked, create a function that GETS information from GIPHY API:
-    // make AJAX call to GIPHY API
-    var queryURL = "https://api.giphy.com/v1/gifs/search?" + topics + "&api_key=0C11n5NgNzl0OC5zLvtsDkQ8Vv2IHwGI&limit=10";
+    
+    // add event listener for when ANY button is clicked to run the function that GETS information from GIPHY API & DISPLAYS:
+    $(document).on("click", ".btn", displayGIFs);
+    
+    // create the function that GETS info & DISPLAYS info
+    function displayGIFs() {
+        // get specific button value clicked and store in a variable
+            var topicVal = $(this).attr("data-name");
+            console.log(topicVal);
+          // pass topicVal into API and store entire API URL in variable
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topicVal + "&api_key=0C11n5NgNzl0OC5zLvtsDkQ8Vv2IHwGI&limit=10";
+        
+        // make AJAX call to GIPHY API
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+        }).then(function(response) {
+            // console.log the "response" as an object
+            var data = response.data;
+            console.log(data);
 
-    $.ajax({
-        url: queryURL,
-        method: "GET",
-    }).then(function(response) {
-       // console.log the "response" as an object
-        console.log(response);
-        // store the response.STATIC path in a variable
-            // display the 10 random STATIC gifs to page
-        // store the response.RATING path in a variable
-            // display the rating to the page (under the gif)
-        // store the response.ANIMATED path in a variable
-    });
+            // loop through the returned 10 arrays of data returned from AJAX call
+                for (var i = 0; i < data.length; i++) {
+                    // create div to hold each gif 
+                        var GIPHYDiv = $("<div>");
+                    
+                    // store the response.RATING path in a variable
+                        var rating = data[i].rating;
+
+                    // create div for rating
+                        var rateDiv = $("<div>").text("Rating: " + rating);
+
+                    // create img div for gifs
+                        var gifImgDiv = $("<img>");   
+
+                    // add src path to still imgs
+                        gifImgDiv.attr("src", data[i].images.fixed_width_still.url);
+                    
+                    // display the 10 random STATIC gifs to page            
+                        GIPHYDiv.append(gifImgDiv);
+                    
+                    // display the rating to the page (under the gif)
+                        GIPHYDiv.append(rateDiv);   
+                        
+                    // prepend GIPHYDivs 
+                        $("#gifs").prepend(GIPHYDiv);
+                }
+        });
+    }
 
 // FXNS FOR WHEN THE GIF IS CLICKED:
     // when the gif is clicked (odd number of times):
@@ -57,13 +90,3 @@
         // create a function that grabs the value from text input and:
             // pushes that value into the array
                 // call function that makes the button & displays on in HTML
-
-
-// Create the AJAX call
-$.ajax({
-    url: queryURL,
-    method: "GET",
-}).then(function (response) {
-    console.log(response);
-});
-    
