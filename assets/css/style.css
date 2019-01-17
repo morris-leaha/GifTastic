@@ -1,4 +1,10 @@
+body {
+    background: #ffffff;
+    background-image: url("../images/concrete_seamless.png");
+}
+
 .btns-div {
+    margin-top: 4rem;
     margin-bottom: 4rem;
 }
 
