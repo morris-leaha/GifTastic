@@ -48,7 +48,7 @@
                         var GIPHYDiv = $("<div>");
                     
                     // store the response.RATING path in a variable
-                        var rating = data[i].rating;
+                        var rating = data[i].rating.toUpperCase();
 
                     // create div for rating
                         var rateDiv = $("<div>").text("Rating: " + rating);
