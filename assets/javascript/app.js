@@ -2,14 +2,14 @@
     // create an initial array (store as var topics = ...)
     var topics = ["Toy Story", "WALL-E", "Finding Nemo", "Minions", "Despicable Me", "The Lion King", "Ratatouille"];
     
-    // create a function to display starting fashion designer buttons
+    // create a function to display starting buttons
     function createBtn() {
         // create a for loop to go through all the values of the array
         for (var i = 0; i < topics.length; i++) {
 
             // create a button for each array value
             var newBtn = $("<button>");
-            newBtn.addClass("btn btn-secondary")
+            newBtn.addClass("btn btn-secondary");
             newBtn.attr("data-name", topics[i]);
             newBtn.text(topics[i]);
 
@@ -23,7 +23,11 @@
 // WHEN BUTTON IS CLICKED, RUN FXN TO GET INFORMATION FROM API & DISPLAY IT
     
     // add event listener for when ANY button is clicked to run the function that GETS information from GIPHY API & DISPLAYS:
-    $(document).on("click", ".btn", displayGIFs);
+    
+    window.onload = function() {
+        $(".btn").on("click", displayGIFs);
+        $("<img>").on("click", animateGIFs);
+    }
     
     // create the function that GETS info & DISPLAYS info
     function displayGIFs() {
@@ -38,42 +42,59 @@
             url: queryURL,
             method: "GET",
         }).then(function(response) {
-            // console.log the "response" as an object
+            console.log(response);
+            // store the relavent response information path (data) in a variable
             var data = response.data;
-            console.log(data);
+            // console.log response data information 
+            console.log(data); 
 
-            // loop through the returned 10 arrays of data returned from AJAX call
+            // loop through the data array returned from AJAX call to create images for each of the 10 object
                 for (var i = 0; i < data.length; i++) {
-                    // create div to hold each gif 
-                        var GIPHYDiv = $("<div>");
+                    // ===== DISPLAY EACH GIF: ======
+                    // create a div that will hold all 10 gifs per button value clicked & store in variable 
+                        var giphyDiv = $("<div class='all-gifs'>");
                     
-                    // store the response.RATING path in a variable
-                        var rating = data[i].rating.toUpperCase();
+                    // create an img div for each ind gif & store in variable
+                        var gifImgDiv = $("<img class='each-gif'>");   
 
-                    // create div for rating
-                        var rateDiv = $("<div>").text("Rating: " + rating);
-
-                    // create img div for gifs
-                        var gifImgDiv = $("<img>");   
-
-                    // add src path to still imgs
+                    // add the src attribute and set to url for still
                         gifImgDiv.attr("src", data[i].images.fixed_width_still.url);
                     
-                    // display the 10 random STATIC gifs to page            
-                        GIPHYDiv.append(gifImgDiv);
+                    // add both the STATIC and ANIMATED urls in data-attributes 
+                        gifImgDiv.attr("data-still", data[i].images.fixed_width_still.url);
+                        gifImgDiv.attr("data-animate", data[i].images.fixed_width.url);
+
+                    // add data-state attribute
+                        gifImgDiv.attr("data-state", "still");
                     
+                    // display the 10 random STATIC gifs to page            
+                        giphyDiv.append(gifImgDiv);
+                    
+                    // ===== DISPLAY EACH RATING: ======
+                    // store the response rating path in a variable
+                        var rating = data[i].rating;
+
+                    // create rating div for each gif & store in variable 
+                        var rateDiv = $("<div class='rating-info'>");
+                    
+                    // add text to rateDiv & store in variable
+                        var ratingDiv = rateDiv.text("Rating: " + rating.toUpperCase());
+
                     // display the rating to the page (under the gif)
-                        GIPHYDiv.append(rateDiv);   
-                        
-                    // prepend GIPHYDivs 
-                        $("#gifs").prepend(GIPHYDiv);
+                        giphyDiv.append(ratingDiv);
+                     
+                    // ===== DISPLAY NEW SET OF GIFS BEFORE OLD SET: ======
+                    // prepend new giphyDiv's on page
+                        $("#gifs").prepend(giphyDiv);
                 }
         });
     }
 
 // FXNS FOR WHEN THE GIF IS CLICKED:
-    // when the gif is clicked (odd number of times):
+    function animateGIFs () {
 
+    }
+    // when the gif is clicked (odd number of times):
         // create a function that:
             // displays the animated gif to the page
 
