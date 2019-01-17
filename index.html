@@ -19,27 +19,40 @@
 
     <div class="container" id="main-container">
 
-        <header>
-            <div class="jumbotron text-center" id="app-title">
-                <h1>GifTastic</h1>
-            </div>
-        </header>
+        <!-- <header></header> -->
 
         <section class="main-section">
-            <!-- Rendered Buttons Will Go Here  -->
-            <div id="buttons-view"></div>
 
-            <form id="button-form">
-                <label for="button-input">Add Your Own Button:</label>
-                <br>
-                <input type="text" id="button-input">
+            <div class="row" id="btns-view">
+                <div class="col">
+                    <!-- DIV FOR CREATED BUTTONS -->
+                    <div id="btns" class="displayed-btns"></div>
+                </div>
+            </div>
 
-                <!-- Button triggers new user button to be added -->
-                <input id="add-button" type="submit" value="Add">
-            </form>
+            <div class="row">
 
-            <!-- New button values will go here -->
-            <div id="movies-view"></div>
+                <div class="col-8" id="gif-view">
+                    <!-- DIV FOR DISPLAYED GIFS -->
+                    <div id="gifs" class="displayed-gifs"></div>
+                </div>
+
+                <div class="col-4" id="add-view">
+                    <!-- FORM INPUT -->
+                    <form id="btn-form" class="form-inline">
+
+                        <div class="form-row align-items-center">
+                            
+                            <div class="col-auto">
+                                <label for="user-input-btn">Add Your Favorite Fashion Designer:</label>
+                                <input type="text" id="user-input-btn" class="form-control" placeholder="Hermes...">
+                                <button type="submit" class="btn btn-secondary">Add</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
         </section>
 
         <footer class="footer">
