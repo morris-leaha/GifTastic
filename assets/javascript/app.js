@@ -1,15 +1,29 @@
 // DISPLAY STARTING BUTTONS 
-// create a function to display starting fashion designer buttons
     // create an initial array (store as var topics = ...)
     var topics = ["Alexander McQueen", "Chanel", "Dior", "Marc Jacobs", "Prada", "Louis Vuitton", "Gucci"];
-    // create a for loop to go through all the values of the array
-        // create a button for each array value
-        // display buttons to page 
+    
+    // create a function to display starting fashion designer buttons
+    function createBtn() {
+        // create a for loop to go through all the values of the array
+        for (var i = 0; i < topics.length; i++) {
+
+            // create a button for each array value
+            var newBtn = $("<button>");
+            newBtn.addClass("btn btn-secondary")
+            newBtn.attr("data-name", topics[i]);
+            newBtn.text(topics[i]);
+
+            // display buttons to page 
+            $("#displayed-btns").append(newBtn);
+        }
+    }
+
+    createBtn();
 
 // WHEN BUTTON IS CLICKED, RUN FXN TO GET INFORMATION FROM API & DISPLAY IT
 // when a fashion designer button is clicked, create a function that GETS information from GIPHY API:
     // make AJAX call to GIPHY API
-    var queryURL = "https://api.giphy.com/v1/gifs/search?" + designers + "&api_key=0C11n5NgNzl0OC5zLvtsDkQ8Vv2IHwGI&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?" + topics + "&api_key=0C11n5NgNzl0OC5zLvtsDkQ8Vv2IHwGI&limit=10";
 
     $.ajax({
         url: queryURL,
