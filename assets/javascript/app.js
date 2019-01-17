@@ -1,116 +1,116 @@
-window.onload = function() {
+window.onload = function () {
     createBtn();
     $(".btn").on("click", displayGIFs);
     $(".ind-gif").on("click", animateGIFs);
 }
 
 // DISPLAY STARTING BUTTONS 
-    // initial array (store as var topics = ...)
-    var topics = ["Toy Story", "WALL-E", "Finding Nemo", "Minions", "Despicable Me", "The Lion King", "Ratatouille"];
-    
-    // create a function to display starting buttons
-    function createBtn() {
-        // create a for loop to go through all the values of the array
-        for (var i = 0; i < topics.length; i++) {
+// initial array (store as var topics = ...)
+var topics = ["Toy Story", "WALL-E", "Finding Nemo", "Minions", "Despicable Me", "The Lion King", "Ratatouille"];
 
-            // create a button for each array value
-            var newBtn = $("<button>");
-            newBtn.addClass("btn btn-secondary");
-            newBtn.attr("data-name", topics[i]);
-            newBtn.text(topics[i]);
+// create a function to display starting buttons
+function createBtn() {
+    // create a for loop to go through all the values of the array
+    for (var i = 0; i < topics.length; i++) {
 
-            // display buttons to page 
-            $("#displayed-btns").append(newBtn);
-        }
+        // create a button for each array value
+        var newBtn = $("<button>");
+        newBtn.addClass("btn btn-secondary");
+        newBtn.attr("data-name", topics[i]);
+        newBtn.text(topics[i]);
+
+        // display buttons to page 
+        $("#displayed-btns").append(newBtn);
     }
+}
 
 // WHEN ANY BUTTON IS CLICKED, RUN FXN TO GET INFORMATION FROM API & DISPLAY IT
-    // create the function that GETS info & DISPLAYS info
-    function displayGIFs() {
-        // get specific button value clicked and store in a variable
-            var topicVal = $(this).attr("data-name");
-            console.log(topicVal);
-          // pass topicVal into API and store entire API URL in variable
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topicVal + "&api_key=0C11n5NgNzl0OC5zLvtsDkQ8Vv2IHwGI&limit=10";
-        
-        // make AJAX call to GIPHY API
-        $.ajax({
-            url: queryURL,
-            method: "GET",
-        }).then(function(response) {
-            console.log(response);
-            // store the relavent response information path (data) in a variable
-            var data = response.data;
-            // console.log response data information 
-            console.log(data); 
+// create the function that GETS info & DISPLAYS info
+function displayGIFs() {
+    // get specific button value clicked and store in a variable
+    var topicVal = $(this).attr("data-name");
+    console.log(topicVal);
+    // pass topicVal into API and store entire API URL in variable
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topicVal + "&api_key=0C11n5NgNzl0OC5zLvtsDkQ8Vv2IHwGI&limit=10";
 
-            // loop through the data array returned from AJAX call to create images for each of the 10 object
-                for (var i = 0; i < data.length; i++) {
-                    // ===== DISPLAY EACH GIF: ======
-                    // create a div that will hold each gif image & store in variable 
-                        var giphyDiv = $("<div class='gif-result'>");
-                    
-                    // create an img for each ind gif & store in variable
-                        var gifImgDiv = $("<img>");   
+    // make AJAX call to GIPHY API
+    $.ajax({
+        url: queryURL,
+        method: "GET",
+    }).then(function (response) {
+        console.log(response);
+        // store the relavent response information path (data) in a variable
+        var data = response.data;
+        // console.log response data information 
+        console.log(data);
 
-                    // add the src attribute and set to url for still
-                        gifImgDiv.attr("src", data[i].images.fixed_width_still.url);
-                    
-                    // add both the STATIC and ANIMATED urls in data-attributes 
-                        gifImgDiv.attr("data-still", data[i].images.fixed_width_still.url);
-                        gifImgDiv.attr("data-animate", data[i].images.fixed_width.url);
+        // loop through the data array returned from AJAX call to create images for each of the 10 object
+        for (var i = 0; i < data.length; i++) {
+            // ===== DISPLAY EACH GIF: ======
+            // create a div that will hold each gif image & store in variable 
+            var giphyDiv = $("<div class='gif-result'>");
 
-                    // add data-state attribute
-                        gifImgDiv.attr("data-state", "still");
+            // create an img for each ind gif & store in variable
+            var gifImgDiv = $("<img>");
 
-                    // add class
-                        gifImgDiv.addClass("ind-gif");
-                    
-                    // append individual gifs to their respective div
-                        giphyDiv.append(gifImgDiv);
-                    
-                    // ===== DISPLAY EACH RATING: ======
-                    // store the response rating path in a variable
-                        var rating = data[i].rating;
+            // add the src attribute and set to url for still
+            gifImgDiv.attr("src", data[i].images.fixed_width_still.url);
 
-                    // create rating div for each gif & store in variable 
-                        var rateDiv = $("<div class='rating-info'>");
-                    
-                    // add text to rateDiv & store in variable
-                        var ratingDiv = rateDiv.text("Rating: " + rating.toUpperCase());
+            // add both the STATIC and ANIMATED urls in data-attributes 
+            gifImgDiv.attr("data-still", data[i].images.fixed_width_still.url);
+            gifImgDiv.attr("data-animate", data[i].images.fixed_width.url);
 
-                    // display the rating to the page (under the gif)
-                        giphyDiv.append(ratingDiv);
-                     
-                    // ===== DISPLAY NEW SET OF GIFS BEFORE OLD SET: ======
-                    // prepend new giphyDiv's on page
-                        $("#gifs").prepend(giphyDiv);
-                }
-        });
-    }
+            // add data-state attribute
+            gifImgDiv.attr("data-state", "still");
+
+            // add class
+            gifImgDiv.addClass("ind-gif");
+
+            // append individual gifs to their respective div
+            giphyDiv.append(gifImgDiv);
+
+            // ===== DISPLAY EACH RATING: ======
+            // store the response rating path in a variable
+            var rating = data[i].rating;
+
+            // create rating div for each gif & store in variable 
+            var rateDiv = $("<div class='rating-info'>");
+
+            // add text to rateDiv & store in variable
+            var ratingDiv = rateDiv.text("Rating: " + rating.toUpperCase());
+
+            // display the rating to the page (under the gif)
+            giphyDiv.append(ratingDiv);
+
+            // ===== DISPLAY NEW SET OF GIFS BEFORE OLD SET: ======
+            // prepend new giphyDiv's on page
+            $("#gifs").prepend(giphyDiv);
+        }
+    });
+}
 
 // FXN FOR WHEN ANY GIF IS CLICKED:
-    function animateGIFs () {
+function animateGIFs() {
 
-        var gifState = $(this).attr("data-state");
-            console.log(gifState);
-        var gifStill = $(this).attr("data-still");
-            console.log(gifStill);
-        var gifAnimate = $(this).attr("data-animate");
-            console.log(gifAnimate);
+    var gifState = $(this).attr("data-state");
+    console.log(gifState);
+    var gifStill = $(this).attr("data-still");
+    console.log(gifStill);
+    var gifAnimate = $(this).attr("data-animate");
+    console.log(gifAnimate);
 
 
-        if (gifState === "still") {
-            $(this).attr("src", gifAnimate);
-            $(this).attr("data-state", "animate");
-        } else if (gifState === "animate") {
-            $(this).attr("src", gifStill);
-            $(this).attr("data-state", "still");
-        }
+    if (gifState === "still") {
+        $(this).attr("src", gifAnimate);
+        $(this).attr("data-state", "animate");
+    } else if (gifState === "animate") {
+        $(this).attr("src", gifStill);
+        $(this).attr("data-state", "still");
     }
+}
 
  // ==================================OPTIONAL/EXTRA=====================================================================       
-            
+
 // USE VALUE FROM USER TEXT TO CREATE NEW BUTTON
 // when a user types a value in text-input field:
     // when submit button is clicked, then:
