@@ -3,6 +3,12 @@ body {
     background-image: url("../images/concrete_seamless.png");
 }
 
+h2 {
+    font-family: 'Amatic SC', cursive;
+    font-size: 4rem;
+    color: rgb(116, 116, 116);
+}
+
 .btns-div {
     margin-top: 4rem;
     margin-bottom: 4rem;
@@ -18,4 +24,8 @@ body {
 
 .btn:last-child {
     margin-right: 0;
+}
+
+.user-input-label {
+    color: rgb(116, 116, 116);
 }
