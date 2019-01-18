@@ -7,7 +7,8 @@
     <title>GifTastic</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- LINK TO BOOTSTRAP (REMOVES NEED FOR RESET CSS) -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <!-- LINK TO CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <!-- LINK TO GOOGLE FONTS -->
@@ -17,55 +18,47 @@
 
 <body>
 
+    
+
     <div class="container" id="main-container">
 
         <header>
-            <h2>Animate Your Favorite Animated Movie</h2>
-            <img src="assets/images/Giphy Attribution Marks/Static Logos/Small/Light Backgrounds/PoweredBy_200px-White_HorizText.png" alt="GIPHY logo" class="img-fluid text-center giphy-logo" id="GIPHYlogo"/>
+            <h2>Animate Your Favorite Animated Movie<img src="assets/images/Giphy Attribution Marks/Static Logos/Small/Light Backgrounds/PoweredBy_200px-White_HorizText.png"
+        alt="GIPHY logo" class="img-fluid giphy-logo" id="GIPHYlogo"/></h2>
+
+            <!-- FORM INPUT -->
+            <form class="form-inline btn-form">
+                <input type="text" class="form-control user-text-input" id="user-input-btn" placeholder="Add Your Favorite...">
+                <button type="submit" class="btn btn-secondary" id="add-btn">Add</button>
+
+
+            </form>
+
+            <nav class="navbar">
+                <!-- DIV FOR CREATED BUTTONS -->
+                <div id="displayed-btns" class="btns-div"></div>
+            </nav>
         </header>
 
+
+
         <section class="main-section">
-
-            <div class="row" id="btns-view">
-                <div class="col">
-                    <div class="about"></div>
-                    <!-- DIV FOR CREATED BUTTONS -->
-                    <div id="displayed-btns" class="btns-div"></div>
-                </div>
-            </div>
-
             <div class="row">
-
-                <div class="col-8" id="gif-view">
+                <div class="col" id="gif-view">
                     <!-- DIV FOR DISPLAYED GIFS -->
                     <div id="gifs" class="displayed-gifs"></div>
-                </div>
-
-                <div class="col-4" id="add-view">
-                    <!-- FORM INPUT -->
-                    <form id="btn-form" class="form-inline justify-content-center">
-
-                        <div class="form-row align-items-center">
-                            
-                            <div class="col-auto">
-                                <input type="text" id="user-input-btn" class="form-control" placeholder="Add Your Favorite...">
-                                <button type="submit" id="add-btn" class="btn btn-secondary">Add</button>
-                            </div>
-
-                        </div>
-                    </form>
                 </div>
             </div>
         </section>
     </div>
-    
+
     <footer class="footer">
-            <div class="container text-center">
-                <span>Copyright &copy; 2018 Leah Morris</span>
-            </div>
+        <div class="container text-center">
+            <span>Copyright &copy; 2018 Leah Morris</span>
+        </div>
     </footer>
 
-    
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>

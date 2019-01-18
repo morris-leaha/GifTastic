@@ -3,6 +3,12 @@ body {
     background-image: url("../images/concrete_seamless.png");
 }
 
+.giphy-logo {
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+
 h2 {
     font-family: 'Amatic SC', cursive;
     font-size: 4rem;
@@ -10,9 +16,18 @@ h2 {
     margin: 2rem 0 auto;
 }
 
-.btns-div {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
+.user-text-input {
+    width: 30%;
+}
+
+.navbar {
+    padding: 0;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.btn-form {
+    margin: 1rem auto;
 }
 
 .btn {
