@@ -51,7 +51,7 @@ function displayGIFs() {
             var giphyDiv = $("<div class='gif-result'>");
 
             // create an img for each ind gif & store in variable
-            var gifImgDiv = $("<img>");
+            var gifImgDiv = $("<img class='img-fluid ind-gif'>");
 
             // add the src attribute and set to url for still
             gifImgDiv.attr("src", data[i].images.fixed_width_still.url);
@@ -62,9 +62,6 @@ function displayGIFs() {
 
             // add data-state attribute
             gifImgDiv.attr("data-state", "still");
-
-            // add class
-            gifImgDiv.addClass("ind-gif");
 
             // append individual gifs to their respective div
             giphyDiv.append(gifImgDiv);
@@ -77,7 +74,7 @@ function displayGIFs() {
             var rateDiv = $("<div class='rating-info'>");
 
             // add text to rateDiv & store in variable
-            var ratingDiv = rateDiv.text("Rating: " + rating.toUpperCase());
+            var ratingDiv = rateDiv.text("Rated: " + rating.toUpperCase());
 
             // display the rating to the page (under the gif)
             giphyDiv.append(ratingDiv);
