@@ -1,8 +1,9 @@
 window.onload = function () {
     createBtn();
-    $(".btn").on("click", displayGIFs);
-    $(".ind-gif").on("click", animateGIFs);
 }
+
+$(document).on("click", ".btn", displayGIFs);
+$(document).on("click", ".ind-gif", animateGIFs);
 
 // DISPLAY STARTING BUTTONS 
 // initial array (store as var topics = ...)
