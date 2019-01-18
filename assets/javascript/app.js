@@ -1,8 +1,4 @@
-window.onload = function () {
-    createBtn();
-}
-
-$(document).on("click", ".btn", displayGIFs);
+$(document).on("click", ".topicBtn", displayGIFs);
 $(document).on("click", ".ind-gif", animateGIFs);
 
 // DISPLAY STARTING BUTTONS 
@@ -11,12 +7,13 @@ var topics = ["Toy Story", "WALL-E", "Finding Nemo", "Minions", "Despicable Me",
 
 // create a function to display starting buttons
 function createBtn() {
+    $("#displayed-btns").empty();
     // create a for loop to go through all the values of the array
     for (var i = 0; i < topics.length; i++) {
 
         // create a button for each array value
         var newBtn = $("<button>");
-        newBtn.addClass("btn btn-secondary");
+        newBtn.addClass("btn btn-secondary topicBtn");
         newBtn.attr("data-name", topics[i]);
         newBtn.text(topics[i]);
 
@@ -24,6 +21,8 @@ function createBtn() {
         $("#displayed-btns").append(newBtn);
     }
 }
+
+createBtn();
 
 // WHEN ANY BUTTON IS CLICKED, RUN FXN TO GET INFORMATION FROM API & DISPLAY IT
 // create the function that GETS info & DISPLAYS info
@@ -92,19 +91,16 @@ function displayGIFs() {
 
 // FXN FOR WHEN ANY GIF IS CLICKED:
 function animateGIFs() {
-
+    // grab values from the gif clicked & stores in variables
     var gifState = $(this).attr("data-state");
-    console.log(gifState);
     var gifStill = $(this).attr("data-still");
-    console.log(gifStill);
     var gifAnimate = $(this).attr("data-animate");
-    console.log(gifAnimate);
-
-
+    
+    // check what the data-state of clicked gif is, then do: 
     if (gifState === "still") {
         $(this).attr("src", gifAnimate);
         $(this).attr("data-state", "animate");
-    } else if (gifState === "animate") {
+    } else {
         $(this).attr("src", gifStill);
         $(this).attr("data-state", "still");
     }
@@ -118,3 +114,15 @@ function animateGIFs() {
         // create a function that grabs the value from text input and:
             // pushes that value into the array
                 // call function that makes the button & displays on in HTML
+
+$("button[type='submit']").on("click", function(event) {
+    event.preventDefault();
+
+    var userInput = $("#user-input-btn").val().trim();
+
+    topics.push(userInput);
+    
+    createBtn();
+});
+
+
