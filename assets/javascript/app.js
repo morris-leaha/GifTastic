@@ -82,6 +82,7 @@ function displayGIFs() {
             // ===== DISPLAY NEW SET OF GIFS BEFORE OLD SET: ======
             // prepend new giphyDiv's on page
             $("#gifs").prepend(giphyDiv);
+            $("#gif-search").html("<h4>Showing Results For " + topicVal + ":</h4>");
         }
     });
 }
