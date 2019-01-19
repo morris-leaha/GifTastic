@@ -12,7 +12,7 @@ body {
 h2 {
     font-family: 'Amatic SC', cursive;
     font-size: 4rem;
-    color: rgb(116, 116, 116);
+    color: rgb(93, 91, 91);
     margin: 2rem 1rem auto;
 }
 
@@ -36,6 +36,23 @@ h2 {
 .gif-result {
     margin: 1rem;
     font-family: 'Life Savers', cursive;
+    cursor: pointer;
+}
+
+.img-fluid {
+    box-shadow: 9px 10px 13px 0px rgba(0,0,0,0.24), 9px 2px 12px 0 rgba(0,0,0,0.19)
+}
+
+.img-fluid:hover {
+    transform: translateY(2px);
+}
+
+.gif-result:active {
+    transform: translateY(2px);
+}
+
+.displayed-gifs {
+    margin-bottom: 5rem;
 }
 
 .user-input-label {
